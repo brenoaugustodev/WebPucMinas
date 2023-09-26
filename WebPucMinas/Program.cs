@@ -1,6 +1,13 @@
+using Microsoft.EntityFrameworkCore;
+using WebPucMinas.Models;
+
 var builder = WebApplication.CreateBuilder(args);
 // add razor runtime compilation
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
+
+// conecta ao banco de dados
+builder.Services.AddDbContext<AppDbContext>(options =>
+        options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
