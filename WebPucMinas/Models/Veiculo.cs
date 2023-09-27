@@ -17,9 +17,11 @@ namespace WebPucMinas.Models
         public string Modelo { get; set; }
         
         [Required(ErrorMessage = "O campo Ano de Fabricação é obrigatório")]
-                public int AnoFabricacao { get; set; }
+        [Display(Name = "Ano de Fabricação")]
+        public int AnoFabricacao { get; set; }
         
         [Required(ErrorMessage = "O campo Ano do Modelo é obrigatório")]
+        [Display(Name = "Ano do Modelo")]
         public int AnoModelo { get; set; }
     }
 }
