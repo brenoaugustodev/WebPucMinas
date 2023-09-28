@@ -13,10 +13,10 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Placa)
+                @Html.DisplayNameFor(model => model.Modelo)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Modelo)
+                @Html.DisplayNameFor(model => model.Placa)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.AnoFabricacao)
@@ -31,10 +31,10 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Placa)
+                <a asp-action="Relatorio" asp-route-id="@item.Id">@item.Modelo</a>
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Modelo)
+                @Html.DisplayFor(modelItem => item.Placa)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.AnoFabricacao)

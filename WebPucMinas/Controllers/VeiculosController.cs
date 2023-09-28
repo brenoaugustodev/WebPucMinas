@@ -90,7 +90,7 @@ namespace WebPucMinas.Controllers
             return View(veiculo);
         }
 
-        
+
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -107,7 +107,7 @@ namespace WebPucMinas.Controllers
             return View(veiculo);
         }
 
-       
+
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int? id)
@@ -121,7 +121,34 @@ namespace WebPucMinas.Controllers
             _context.Veiculos.Remove(veiculo);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
-            
+
+        }
+
+        // metodo para relatorio
+        public async Task<IActionResult> Relatorio(int id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var veiculo = await _context.Veiculos.FindAsync(id);
+            if (veiculo == null)
+            {
+                return NotFound();
+            }
+
+            var consumos = await _context.Consumos
+                .Where(c => c.VeiculoId == id)
+                .OrderByDescending(c => c.Data)
+                .ToListAsync();
+
+            decimal total = consumos.Sum(c => c.Valor);
+
+
+            ViewBag.Total = total;
+            ViewBag.Veiculo = veiculo;    
+
+            return View(consumos);
         }
 
 
